@@ -1,4 +1,4 @@
-let menu = document.getElementsByClassName("header");
+//let menu = document.getElementsByClassName("header");
 let sectionTwo = document.getElementById("entendiendo-violencia");
 let sectionFlags = document.getElementById("section-flags");
 let sectionIndicator = document.getElementById("section-indicator");
