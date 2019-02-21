@@ -2,6 +2,7 @@
 let sectionTwo = document.getElementById("entendiendo-violencia");
 let sectionFlags = document.getElementById("section-flags");
 let sectionIndicator = document.getElementById("section-indicator");
+let sectionCountry = document.getElementById('section-country');
 
 function display (elements, display = 'inline-block') {
   for (let i = 0; i < elements.length; i++) {
@@ -27,4 +28,10 @@ document.getElementById("btn-indicator").addEventListener("click", buttonIndicat
 function buttonIndicator() {
   display([sectionTwo, sectionFlags], "none");
   display([sectionIndicator]);
+}
+
+document.getElementById("mexico").addEventListener("click", buttonFlagMexico);
+function buttonFlagMexico() {
+  display([sectionTwo, sectionFlags, sectionIndicator], "none");
+  display([sectionCountry]);
 }

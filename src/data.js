@@ -17,8 +17,7 @@ const indicatorsPerceptionCult = ["SG.VAW.REFU.ZS",
 "SP.M18.2024.FE.ZS"
 ]
 
-//Imprimir solo indicatorCode
-const values = []
+//Iterar
 indicatorCountryPer.forEach(function(element) {
   const name = element[0]
   const code = element[1]
