@@ -94,6 +94,12 @@ function filterCountry (country) {
   return indicatorsCountry
 }
 
-// function filterCountryIndicatorName() {
-//
-// }
+function addIndicatorNames(indicators, parentElement) {
+  for (var i = 0; i < indicators.length; i++) {
+    const indicatorValue = indicators[i];
+    const newP = document.createElement("p");
+    const content = document.createTextNode(indicatorValue.indicatorName);
+    newP.appendChild(content);
+    parentElement.parentNode.insertBefore(newP, parentElement.nextSibling);
+  }
+}

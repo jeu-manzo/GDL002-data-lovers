@@ -39,6 +39,36 @@ function buttonFlagMexico() {
   display([sectionCountry]);
   country = document.getElementById("mexico").dataset.country
   let result = filterCountry(country)
-  console.log(result)
-  document.getElementById('country-name').innerHTML = result[0].indicatorName;
+  const countryNameElement = document.getElementById('country-name');
+  addIndicatorNames(result, countryNameElement)
+}
+
+document.getElementById("peru").addEventListener("click", buttonFlagPeru);
+function buttonFlagPeru() {
+  display([sectionTwo, sectionFlags, sectionIndicator], "none");
+  display([sectionCountry]);
+  country = document.getElementById("peru").dataset.country
+  let result = filterCountry(country)
+  const countryNameElement = document.getElementById('country-name');
+  addIndicatorNames(result, countryNameElement)
+}
+
+document.getElementById("chile").addEventListener("click", buttonFlagChile);
+function buttonFlagChile() {
+  display([sectionTwo, sectionFlags, sectionIndicator], "none");
+  display([sectionCountry]);
+  country = document.getElementById("chile").dataset.country
+  let result = filterCountry(country)
+  const countryNameElement = document.getElementById('country-name');
+  addIndicatorNames(result, countryNameElement)
+}
+
+document.getElementById("brasil").addEventListener("click", buttonFlagBrasil);
+function buttonFlagBrasil() {
+  display([sectionTwo, sectionFlags, sectionIndicator], "none");
+  display([sectionCountry]);
+  country = document.getElementById("brasil").dataset.country
+  let result = filterCountry(country)
+  const countryNameElement = document.getElementById('country-name');
+  addIndicatorNames(result, countryNameElement)
 }
