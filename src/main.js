@@ -18,6 +18,7 @@ function buttonData() {
   display([sectionTwo]);
 }
 
+
 document.getElementById("btn-country").addEventListener("click", buttonCountry);
 function buttonCountry() {
   display([sectionTwo], "none");
@@ -30,8 +31,14 @@ function buttonIndicator() {
   display([sectionIndicator]);
 }
 
+let country = "";
+
 document.getElementById("mexico").addEventListener("click", buttonFlagMexico);
 function buttonFlagMexico() {
   display([sectionTwo, sectionFlags, sectionIndicator], "none");
   display([sectionCountry]);
+  country = document.getElementById("mexico").dataset.country
+  let result = filterCountry(country)
+  console.log(result)
+  document.getElementById('country-name').innerHTML = result[0].indicatorName;
 }
