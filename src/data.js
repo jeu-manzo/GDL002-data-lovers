@@ -3,10 +3,34 @@
 
 
 //Obtener en un array los valores de indicatorName y indicatorCode
-const indicatorCountryPer = window.WORLDBANK.PER.indicators.map
+let countries = Object.values(window.WORLDBANK);
+let countryPer = countries[0];
+let indicatorsCountry = countryPer.indicators;
+
+
+
+
+console.log(indicatorsCountry);
+
+// countries.forEach(function(element) {
+//   console.log(element);
+// });
+
+
+// const indicatorCountryPer = countries.map
+// (({
+//   indicatorName, indicatorCode
+// }) => [indicatorName, indicatorCode]);
+//
+// console.log(indicatorCountryPer);
+// const country = PER;
+//
+const indicatorCountryPer = indicatorsCountry.map
 (({
   indicatorName, indicatorCode
 }) => [indicatorName, indicatorCode]);
+
+
 
 const indicatorsPerceptionCult = ["SG.VAW.REFU.ZS",
 "SG.VAW.REAS.ZS",
@@ -27,7 +51,6 @@ indicatorCountryPer.forEach(function(element) {
   })
 
   if (isIn !== -1) {
-    // values.push(element[1]);
     console.log(name)
   }
 })
