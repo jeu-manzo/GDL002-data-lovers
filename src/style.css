@@ -184,3 +184,7 @@ button {
   margin-top: 20px;
   display: flex;
 }
+
+#section-country div {
+  margin-top: 100px;
+}
