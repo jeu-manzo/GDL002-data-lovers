@@ -3,6 +3,7 @@ let sectionTwo = document.getElementById("entendiendo-violencia");
 let sectionFlags = document.getElementById("section-flags");
 let sectionIndicator = document.getElementById("section-indicator");
 let sectionCountry = document.getElementById('section-country');
+let sectionIndicatorCountry = document.getElementById('indicator-country');
 
 function display (elements, display = 'inline-block') {
   for (let i = 0; i < elements.length; i++) {
@@ -41,6 +42,7 @@ function buttonFlagMexico() {
   let result = filterCountry(country)
   const countryNameElement = document.getElementById('country-name');
   addIndicatorNames(result, countryNameElement)
+  document.getElementById('title-country').innerHTML = 'Mexico';
 }
 
 document.getElementById("peru").addEventListener("click", buttonFlagPeru);
@@ -51,6 +53,7 @@ function buttonFlagPeru() {
   let result = filterCountry(country)
   const countryNameElement = document.getElementById('country-name');
   addIndicatorNames(result, countryNameElement)
+  document.getElementById('title-country').innerHTML = 'Perú';
 }
 
 document.getElementById("chile").addEventListener("click", buttonFlagChile);
@@ -61,6 +64,7 @@ function buttonFlagChile() {
   let result = filterCountry(country)
   const countryNameElement = document.getElementById('country-name');
   addIndicatorNames(result, countryNameElement)
+  document.getElementById('title-country').innerHTML = 'Chile';
 }
 
 document.getElementById("brasil").addEventListener("click", buttonFlagBrasil);
@@ -71,4 +75,5 @@ function buttonFlagBrasil() {
   let result = filterCountry(country)
   const countryNameElement = document.getElementById('country-name');
   addIndicatorNames(result, countryNameElement)
+  document.getElementById('title-country').innerHTML = 'Brasil';
 }
