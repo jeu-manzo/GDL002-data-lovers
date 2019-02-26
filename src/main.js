@@ -11,7 +11,7 @@ function display (elements, display = 'inline-block') {
   }
 }
 
-display([sectionTwo, sectionFlags, sectionIndicator], "none");
+display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry, sectionIndicatorCountry], "none");
 
 
 document.getElementById("btn-data").addEventListener("click", buttonData);
@@ -72,8 +72,9 @@ function buttonFlagBrasil() {
   display([sectionTwo, sectionFlags, sectionIndicator], "none");
   display([sectionCountry]);
   country = document.getElementById("brasil").dataset.country
-  let result = filterCountry(country)
+  let result = filterCountry(country);
   const countryNameElement = document.getElementById('country-name');
-  addIndicatorNames(result, countryNameElement)
+  addIndicatorNames(result, countryNameElement);
   document.getElementById('title-country').innerHTML = 'Brasil';
+  console.log(event)
 }
