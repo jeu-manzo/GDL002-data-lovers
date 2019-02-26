@@ -33,6 +33,7 @@ function buttonIndicator() {
 }
 
 let country = "";
+let codeCountry = "";
 
 document.getElementById("mexico").addEventListener("click", buttonFlagMexico);
 function buttonFlagMexico() {
@@ -65,6 +66,7 @@ function buttonFlagChile() {
   const countryNameElement = document.getElementById('country-name');
   addIndicatorNames(result, countryNameElement)
   document.getElementById('title-country').innerHTML = 'Chile';
+  codeCountry = event.toElement.dataset.country;
 }
 
 document.getElementById("brasil").addEventListener("click", buttonFlagBrasil);
@@ -76,5 +78,5 @@ function buttonFlagBrasil() {
   const countryNameElement = document.getElementById('country-name');
   addIndicatorNames(result, countryNameElement);
   document.getElementById('title-country').innerHTML = 'Brasil';
-  console.log(event)
+  console.log(event.toElement.dataset.country)
 }

@@ -34,7 +34,7 @@ function addIndicatorNames(indicators, parentElement) {
     const link = document.createElement("a");
     const newPID = newP.setAttribute("class", "one-indicator")
     const newPSetCode = link.setAttribute("data-code", indicatorValue.indicatorCode)
-    //const newPSetCountry = link.setAttribute("data-country", indicatorValue.countryCode)
+    const newPSetCountry = link.setAttribute("data-country", indicatorValue.countryCode)
     link.href = '#'
     const content = document.createTextNode(indicatorValue.indicatorName);
     newP.appendChild(link);
@@ -51,30 +51,25 @@ function addIndicatorNames(indicators, parentElement) {
   function linkIndicator() {
     display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry], "none");
     display([sectionIndicatorCountry]);
-    //console.log(event);
     //agregar títutlo
+    //console.log(event);
     document.getElementById('title-indicator').innerHTML = event.target.innerText;
-    //obtener años
-    let result = filterCountry(country);
-    const dataTable = result.map(indicator => indicator.data);
-      console.log(dataTable);
-      console.log(event.target);
-
-    //console.log(result)
-    //filterYearsIndicator(result)
-    //const elementTable = document.getElementById('indicator-table-country');
-    //filterYearsIndicator(result, elementTable);
+      //obtener años por indicador por país
+    const codeIndicator = event.srcElement.dataset.code;
+    const countryIndicator = event.srcElement.dataset.country;
+    const objData = filterIndicatorYear(codeIndicator, countryIndicator);
+    return objData;
   }
 }
 
 
 
-function filterIndicatorYear(code) {
-  const pais = filterCountry("MEX")
-  const data = pais.filter(indicator => indicator.indicatorCode == code)
+function filterIndicatorYear(code, country) {
+  const countryInd = filterCountry(country)
+  const dataYear = countryInd.filter(indicator => indicator.indicatorCode == code)
 
-  return data[0].data
+  return dataYear[0].data
 
 }
 
-console.log(filterIndicatorYear("SP.M18.2024.FE.ZS"));
+//console.log(filterIndicatorYear("SP.M18.2024.FE.ZS"));
