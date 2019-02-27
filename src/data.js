@@ -58,7 +58,7 @@ function addIndicatorNames(indicators, parentElement) {
     const codeIndicator = event.srcElement.dataset.code;
     const countryIndicator = event.srcElement.dataset.country;
     const objData = filterIndicatorYear(codeIndicator, countryIndicator);
-    return objData;
+    createTableYears(objData);
   }
 }
 
@@ -71,5 +71,3 @@ function filterIndicatorYear(code, country) {
   return dataYear[0].data
 
 }
-
-//console.log(filterIndicatorYear("SP.M18.2024.FE.ZS"));

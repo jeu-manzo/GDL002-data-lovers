@@ -80,3 +80,65 @@ function buttonFlagBrasil() {
   document.getElementById('title-country').innerHTML = 'Brasil';
   console.log(event.toElement.dataset.country)
 }
+
+//función para crear tabla de años y sus porcentajes por país
+function createTableYears(years) {
+        // get the reference for the body
+  const mybody = document.getElementById("indicator-table-country");
+
+  // creates <table> and <tbody> elements
+  table     = document.createElement("table");
+  tablebody = document.createElement("tbody");
+
+  const header = document.createElement("tr");
+
+  const cellYears = document.createElement("th");
+  const cellPercent = document.createElement("th");
+
+  header.appendChild(cellYears);
+  header.appendChild(cellPercent);
+
+  table.appendChild(header);
+
+  // creating all cells
+  for(var j = 0; j < Object.keys(years).length; j++) {
+    var year = Object.keys(years)[j];
+    var percent = Object.values(years)[j];
+    // creates a <tr> element
+      mycurrent_row = document.createElement("tr");
+          // creates a <td> element's
+          year_cell = document.createElement("td");
+          percent_cell = document.createElement("td");
+          // creates a Text Node
+    if (percent == "") { currenttext2 = document.createTextNode("no info.");
+      } else {
+        currenttext2 = document.createTextNode(percent);
+      }
+          currenttext = document.createTextNode(year);
+          // appends the Text Node we created into the cell <td>
+          year_cell.appendChild(currenttext);
+          percent_cell.appendChild(currenttext2);
+
+          // appends the cell <td> into the row <tr>
+          mycurrent_row.appendChild(year_cell);
+          mycurrent_row.appendChild(percent_cell);
+
+      // appends the row <tr> into <tbody>
+      tablebody.appendChild(mycurrent_row);
+  }
+
+
+          titleYears = document.createTextNode("Años");
+          titlePercents = document.createTextNode("Porcentaje %");
+
+          cellYears.appendChild(titleYears);
+          cellPercent.appendChild(titlePercents);
+
+
+  // appends <tbody> into <table>
+  table.appendChild(tablebody);
+  // appends <table> into <body>
+  mybody.appendChild(table);
+  // sets the border attribute of mytable to 2;
+  table.setAttribute("border","2");
+}
