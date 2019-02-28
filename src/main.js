@@ -4,6 +4,9 @@ let sectionFlags = document.getElementById("section-flags");
 let sectionIndicator = document.getElementById("section-indicator");
 let sectionCountry = document.getElementById('section-country');
 let sectionIndicatorCountry = document.getElementById('indicator-country');
+const sectionCategories = document.getElementById('categories');
+const sectionIndicatorCountries = document.getElementById('indicator-countries');
+
 
 function display (elements, display = 'inline-block') {
   for (let i = 0; i < elements.length; i++) {
@@ -11,7 +14,7 @@ function display (elements, display = 'inline-block') {
   }
 }
 
-display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry, sectionIndicatorCountry], "none");
+display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry, sectionIndicatorCountry, sectionCategories, sectionIndicatorCountries], "none");
 
 
 document.getElementById("btn-data").addEventListener("click", buttonData);
@@ -22,63 +25,77 @@ function buttonData() {
 
 document.getElementById("btn-country").addEventListener("click", buttonCountry);
 function buttonCountry() {
-  display([sectionTwo], "none");
+  display([sectionTwo, sectionCategories], "none");
   display([sectionFlags]);
 }
 
 document.getElementById("btn-indicator").addEventListener("click", buttonIndicator);
 function buttonIndicator() {
-  display([sectionTwo, sectionFlags], "none");
+  display([sectionTwo, sectionFlags, sectionCategories], "none");
   display([sectionIndicator]);
 }
 
 let country = "";
-let codeCountry = "";
 
 document.getElementById("mexico").addEventListener("click", buttonFlagMexico);
 function buttonFlagMexico() {
-  display([sectionTwo, sectionFlags, sectionIndicator], "none");
+  display([sectionTwo, sectionFlags, sectionIndicator,sectionCategories], "none");
   display([sectionCountry]);
   country = document.getElementById("mexico").dataset.country
   let result = filterCountry(country)
   const countryNameElement = document.getElementById('country-name');
-  addIndicatorNames(result, countryNameElement)
+  showIndicatorNames(result, countryNameElement)
   document.getElementById('title-country').innerHTML = 'Mexico';
+  getElementsforEvents('one-indicator', linkIndicator);
 }
 
 document.getElementById("peru").addEventListener("click", buttonFlagPeru);
 function buttonFlagPeru() {
-  display([sectionTwo, sectionFlags, sectionIndicator], "none");
+  display([sectionTwo, sectionFlags, sectionIndicator, sectionCategories], "none");
   display([sectionCountry]);
   country = document.getElementById("peru").dataset.country
   let result = filterCountry(country)
   const countryNameElement = document.getElementById('country-name');
-  addIndicatorNames(result, countryNameElement)
+  showIndicatorNames(result, countryNameElement)
   document.getElementById('title-country').innerHTML = 'Perú';
+  getElementsforEvents('one-indicator', linkIndicator);
 }
 
 document.getElementById("chile").addEventListener("click", buttonFlagChile);
 function buttonFlagChile() {
-  display([sectionTwo, sectionFlags, sectionIndicator], "none");
+  display([sectionTwo, sectionFlags, sectionIndicator, sectionCategories], "none");
   display([sectionCountry]);
   country = document.getElementById("chile").dataset.country
   let result = filterCountry(country)
   const countryNameElement = document.getElementById('country-name');
-  addIndicatorNames(result, countryNameElement)
+  showIndicatorNames(result, countryNameElement)
   document.getElementById('title-country').innerHTML = 'Chile';
-  codeCountry = event.toElement.dataset.country;
+  getElementsforEvents('one-indicator', linkIndicator);
 }
 
 document.getElementById("brasil").addEventListener("click", buttonFlagBrasil);
 function buttonFlagBrasil() {
-  display([sectionTwo, sectionFlags, sectionIndicator], "none");
+  display([sectionTwo, sectionFlags, sectionIndicator, sectionCategories], "none");
   display([sectionCountry]);
   country = document.getElementById("brasil").dataset.country
   let result = filterCountry(country);
   const countryNameElement = document.getElementById('country-name');
-  addIndicatorNames(result, countryNameElement);
+  showIndicatorNames(result, countryNameElement);
   document.getElementById('title-country').innerHTML = 'Brasil';
-  console.log(event.toElement.dataset.country)
+  getElementsforEvents('one-indicator', linkIndicator);
+}
+
+function linkIndicator() {
+  display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry], "none");
+  display([sectionIndicatorCountry]);
+  //agregar títutlo
+  //console.log(event);
+  document.getElementById('title-indicator').innerHTML = event.target.innerText;
+    //obtener años por indicador por país
+  const codeIndicator = event.srcElement.dataset.code;
+  const countryIndicator = event.srcElement.dataset.country;
+  const objData = filterIndicatorYear(codeIndicator, countryIndicator);
+  createTableYears(objData);
 }
 
 //función para crear tabla de años y sus porcentajes por país
@@ -141,4 +158,49 @@ function createTableYears(years) {
   mybody.appendChild(table);
   // sets the border attribute of mytable to 2;
   table.setAttribute("border","2");
+};
+
+document.getElementById("perception-cultural").addEventListener('click', linkPerceptionCultural);
+function linkPerceptionCultural() {
+  display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry], "none");
+  display([sectionCategories]);
+  const elementNode = document.getElementById('section-categories');
+  showAllIndicators(indicatorsPerceptionCult, elementNode)
+  getElementsforEvents('each-indicator', linkIndicatorsAllContries);
+}
+
+document.getElementById("literacy").addEventListener('click', linkLiteracy);
+function linkLiteracy() {
+  display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry], "none");
+  display([sectionCategories]);
+  const elementNode = document.getElementById('section-categories');
+  showAllIndicators(indicatorsLiteracy, elementNode);
+  getElementsforEvents('each-indicator', linkIndicatorsAllContries);
+}
+
+document.getElementById("unemployment").addEventListener('click', linkUnemployment);
+function linkUnemployment() {
+  display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry], "none");
+  display([sectionCategories]);
+  const elementNode = document.getElementById('section-categories');
+  showAllIndicators(indicatorUnemployment, elementNode);
+  getElementsforEvents('each-indicator', linkIndicatorsAllContries);
+}
+
+//
+function linkIndicatorsAllContries() {
+  display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry, sectionCategories], "none");
+  display([sectionIndicatorCountries]);
+  // console.log(filterIndicatorCategory(event.srcElement.dataset.code));
+  console.log(event.srcElement.dataset.code);
+  filterIndicatorCategory(indicatorsLiteracy)
+}
+
+//iterar elementos por clase para los eventos click
+function getElementsforEvents(className, functionName) {
+  const eachIndicator = document.getElementsByClassName(className);
+  const arrayEachIndicator = Object.values(eachIndicator);
+  arrayEachIndicator.forEach(function(element) {
+        element.addEventListener('click', functionName);
+      });
 }
