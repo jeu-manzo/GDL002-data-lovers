@@ -185,6 +185,26 @@ button {
   display: flex;
 }
 
+#title-country{
+  margin-top: 100px;
+}
+
 #section-country div {
+  margin-top: 50px;
+}
+
+a:link{
+  text-decoration: none;
+}
+
+#title-indicator {
+  margin-top: 100px;
+}
+
+#section-categories {
+  margin-top: 100px;
+}
+
+#select {
   margin-top: 100px;
 }
