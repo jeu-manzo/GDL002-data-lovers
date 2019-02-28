@@ -88,10 +88,10 @@ function showAllIndicators(category, parentElement) {
     const indicatorValue = element;
     const newP = document.createElement("p");
     const link = document.createElement("a");
-    const newPClass = link.setAttribute("class", "each-indicator")
-    newPSetCode = link.setAttribute("data-code", indicatorValue.indicatorCode)
+    const newPClass = link.setAttribute("class", "each-indicator");
+    newPSetCode = link.setAttribute("data-code", indicatorValue.indicatorCode);
     // const newPSetCountry = link.setAttribute("data-country", indicatorValue.countryCode)
-    link.href = '#'
+    link.href = '#';
     const content = document.createTextNode(indicatorValue.indicatorName);
     newP.appendChild(link);
     link.appendChild(content);
@@ -101,23 +101,67 @@ function showAllIndicators(category, parentElement) {
 
 }
 
+//Trabajar despues
+// //Filtrar información de cada indicadores por categoría de todos los países
+// function filterIndicatorCategory(categories, code) {
+//   const dataCountry = WORLDBANK;
+//   const arrayData = Object.values(dataCountry);
+//   arrayData.forEach(function(element) {
+//     const indicatorCountry = element.indicators
+//     const filterIndicator = indicatorCountry.filter(function (indicator) {
+//       const indicatorCode = indicator.indicatorCode
+//       //console.log(indicatorCode);
+//       const indicatorsCode = categories.map(ind => ind.indicatorCode);
+//       const isIn = indicatorsCode.findIndex(function (val) {
+//         return val === indicatorCode
+//       })
+//
+//       return isIn !== -1
+//     })
+//
+//     filterIndicator.forEach(function(element) {
+//       console.log(element);
+//     });
+//   });
+// }
 
-//Filtrar información de cada indicadores por categoría de todos los países
-function filterIndicatorCategory(categories) {
-  const dataCountry = WORLDBANK;
-  const arrayData = Object.values(dataCountry);
-  arrayData.forEach(function(element) {
-    const indicatorCountry = element.indicators
-    const filterIndicator = indicatorCountry.filter(function (indicator) {
-      const indicatorCode = indicator.indicatorCode
-      console.log(indicatorCode);
-      const indicatorsCode = categories.map(ind => ind.indicatorCode);
-      const isIn = indicatorsCode.findIndex(function (val) {
-        return val === indicatorCode
-      })
+let indicatorGrales = (code) => {
+      indiPer = WORLDBANK.PER.indicators.filter(indicator => indicator.indicatorCode == code);
+      indiMex = WORLDBANK.MEX.indicators.filter(indicator => indicator.indicatorCode == code);
+       indiBra = WORLDBANK.BRA.indicators.filter(indicator => indicator.indicatorCode == code);
+       indiChl = WORLDBANK.CHL.indicators.filter(indicator => indicator.indicatorCode == code);
+       indiGral = [indiBra,indiChl,indiMex,indiPer];
+       return indiGral;
+    };
 
-      return isIn !== -1
-    })
-    console.log(filterIndicator);
-  });
-}
+//retorna nombre paises
+indicatorTableCountry = (code) => {
+  const pruebas21=[];
+  indicatorGrales(code).forEach(function(e) {
+    pruebas21.push(e[0]);
+  })
+   fullNames = pruebas21.map(inventor => inventor.countryName);
+   return fullNames;
+  };
+
+//retorna data
+indicatorTableData = (code) => {
+  const pruebas12=[];
+  indicatorGrales(code).forEach(function(e) {
+    pruebas12.push(e[0]);
+  })
+   fullData = pruebas12.map(inventor => inventor.data);
+   return fullData;
+  };
+
+
+
+//   function filterYearAllContries(year) {
+//     const years = indicatorTableData('SG.VAW.REFU.ZS');
+//     const arr = Object.values(years)
+//     console.log(arr.filter(word => word.0.3)));
+//
+//   }
+// //arr.filter(word => word.2006)
+// // mapyears = element.map(x => x.year);
+//   console.log(filterYearAllContries(2006));
