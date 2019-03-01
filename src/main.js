@@ -19,7 +19,6 @@ display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry, sectionIndi
 
 document.getElementById("btn-data").addEventListener("click", buttonData);
 function buttonData() {
-  display([sectionPeru,sectionFlags,sectionIndicator,sectionMex], "none");
   display([sectionTwo]);
 }
 
