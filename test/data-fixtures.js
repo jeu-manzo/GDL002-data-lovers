@@ -17,7 +17,31 @@ const indicatorsPerceptionCult = [
   indicatorName: "Mujeres que se casaron por primera vez antes de los 18 (% de mujeres 10-24)" },
 ];
 
+// const showIndicatorsName =
+// <html>
+// // <p class="one-indicator"><a data-code="SP.M18.2024.FE.ZS" data-country="MEX" href="#">Mujeres que se casaron por primera vez antes de los 18 (% de mujeres 10-24)</a></p>
+// // <p class="one-indicator"><a data-code="SG.VAW.ARGU.ZS" data-country="MEX" href="#">Mujeres que creen que está justificado que un marido golpee a su esposa cuando ella discute con él (%)</a></p>
+// // <p class="one-indicator"><a data-code="SG.VAW.BURN.ZS" data-country="MEX" href="#">Mujeres que creen que está justificado que un marido golpee a su esposa cuando a ella se le quema la comida (%)</a></p>
+// // <p class="one-indicator"><a data-code="SG.VAW.GOES.ZS" data-country="MEX" href="#">Mujeres que creen que está justificado que un marido golpee a su esposa cuando sale sin avisarle (%)</a></p>
+// // <p class="one-indicator"><a data-code="SG.VAW.NEGL.ZS" data-country="MEX" href="#">Mujeres que creen que está justificado que un marido golpee a su esposa cuando descuida a los hijos (%)</a></p>
+// // <p class="one-indicator"><a data-code="SG.VAW.REAS.ZS" data-country="MEX" href="#">Mujeres que creen que está justificado que un marido golpee a su esposa (cualquiera de las cinco razones) (%)</a></p>
+// // <p class="one-indicator"><a data-code="SG.VAW.REFU.ZS" data-country="MEX" href="#">Mujeres que creen que está justificado que un marido golpee a su esposa cuando ella se niega a tener relaciones sexuales (%)</a></p>
+// </html>
+
+// document.body.innerHTML =
+// '<p class="one-indicator"><a data-code="SP.M18.2024.FE.ZS" data-country="MEX" href="#">Mujeres que se casaron por primera vez antes de los 18 (% de mujeres 10-24)</a></p>' +
+// '<p class="one-indicator"><a data-code="SG.VAW.ARGU.ZS" data-country="MEX" href="#">Mujeres que creen que está justificado que un marido golpee a su esposa cuando ella discute con él (%)</a></p>' +
+// '<p class="one-indicator"><a data-code="SG.VAW.BURN.ZS" data-country="MEX" href="#">Mujeres que creen que está justificado que un marido golpee a su esposa cuando a ella se le quema la comida (%)</a></p>' +
+// '<p class="one-indicator"><a data-code="SG.VAW.GOES.ZS" data-country="MEX" href="#">Mujeres que creen que está justificado que un marido golpee a su esposa cuando sale sin avisarle (%)</a></p> '+
+// '<p class="one-indicator"><a data-code="SG.VAW.NEGL.ZS" data-country="MEX" href="#">Mujeres que creen que está justificado que un marido golpee a su esposa cuando descuida a los hijos (%)</a></p>' +
+// '<p class="one-indicator"><a data-code="SG.VAW.REAS.ZS" data-country="MEX" href="#">Mujeres que creen que está justificado que un marido golpee a su esposa (cualquiera de las cinco razones) (%)</a></p>' +
+// '<p class="one-indicator"><a data-code="SG.VAW.REFU.ZS" data-country="MEX" href="#">Mujeres que creen que está justificado que un marido golpee a su esposa cuando ella se niega a tener relaciones sexuales (%)</a></p>)'
+// );
+
+const objYears = {1960: "", 1961: "", 1962: "", 1963: "", 1964: "", 1965: "", 1966: "", 1967: "", 1968: "", 1969: "", 1970: "", 1971: "", 1972: "", 1973: "", 1974: "", 1975: "", 1976: "", 1977: "", 1978: "", 1979: "", 1980: "", 1981: "", 1982: "", 1983: "", 1984: "", 1985: "", 1986: "", 1987: "", 1988: "", 1989: "", 1990: "", 1991: "", 1992: "", 1993: "", 1994: "", 1995: "", 1996: "", 1997: "", 1998: "", 1999: "", 2000: "", 2001: "", 2002: "", 2003: "", 2004: "", 2005: "", 2006: 0.3, 2007: "", 2008: 0.8, 2009: 1, 2010: 0.8, 2011: 0.6, 2012: 0.6, 2013: "", 2014: "", 2015: "", 2016: "", 2017: ""};
+
 module.exports = {
   filterMxData: filterMxData,
   indicatorsPerceptionCult: indicatorsPerceptionCult,
+  objYears: objYears,
 };

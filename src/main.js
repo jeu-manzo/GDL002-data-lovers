@@ -83,9 +83,10 @@ function buttonFlagMexico() {
   display([sectionCountry]);
   country = document.getElementById("mexico").dataset.country;
   let result = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
-  console.log(result);
+  console.log(result.map(x => x.indicatorName));
   const countryNameElement = document.getElementById('country-name');
-  window.dataLovers.showIndicatorNamesCountry(result, countryNameElement);
+  const log = window.dataLovers.showIndicatorNamesCountry(result, countryNameElement);
+  console.log(typeof(log));
   document.getElementById('title-country').innerHTML = 'Mexico';
   getElementsforEvents('one-indicator', linkIndicator);
 }
@@ -136,7 +137,6 @@ function linkIndicator() {
   const codeIndicator = event.srcElement.dataset.code;
   const countryIndicator = event.srcElement.dataset.country;
   const objData = window.dataLovers.filterIndicatorYear(codeIndicator, countryIndicator, indicatorsPerceptionCult);
-  //console.log(objData);
   createTableYears(objData);
 }
 
