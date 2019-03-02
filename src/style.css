@@ -1,10 +1,25 @@
 body {
-  display: flex;
   margin: 0;
   font-family: Helvetica, sans-serif;
-  background-color: #f4f4f4;
+  background-color: white;
 }
 
+
+#home {
+  display: flex;
+  justify-content: center;
+}
+
+header a img{
+  height: 50px;
+  width: 130px;
+}
+
+#home img {
+  margin-top: 70px;
+  min-width: 90%;
+  height: 555px;
+}
 
 a {
   color: #000;

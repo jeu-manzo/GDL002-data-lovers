@@ -1,11 +1,12 @@
 //let menu = document.getElementsByClassName("header");
-let sectionTwo = document.getElementById("entendiendo-violencia");
-let sectionFlags = document.getElementById("section-flags");
-let sectionIndicator = document.getElementById("section-indicator");
-let sectionCountry = document.getElementById('section-country');
-let sectionIndicatorCountry = document.getElementById('indicator-country');
+const sectionTwo = document.getElementById("entendiendo-violencia");
+const sectionFlags = document.getElementById("section-flags");
+const sectionIndicator = document.getElementById("section-indicator");
+const sectionCountry = document.getElementById('section-country');
+const sectionIndicatorCountry = document.getElementById('indicator-country');
 const sectionCategories = document.getElementById('categories');
 const sectionIndicatorCountries = document.getElementById('indicator-countries');
+const sectionHome = document.getElementById('home');
 
 const indicatorsPerceptionCult = [
   { indicatorCode: "SG.VAW.REFU.ZS",
@@ -53,6 +54,7 @@ function display (elements, display = 'inline-block') {
     elements[i].style.display = display;
   }
 }
+
 
 display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry, sectionIndicatorCountry, sectionCategories, sectionIndicatorCountries], "none");
 
