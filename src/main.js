@@ -7,7 +7,6 @@ let sectionIndicatorCountry = document.getElementById('indicator-country');
 const sectionCategories = document.getElementById('categories');
 const sectionIndicatorCountries = document.getElementById('indicator-countries');
 
-
 const indicatorsPerceptionCult = [
   { indicatorCode: "SG.VAW.REFU.ZS",
   indicatorName: "Mujeres que creen que está justificado que un marido golpee a su esposa cuando ella se niega a tener relaciones sexuales (%)" },
@@ -83,7 +82,7 @@ function buttonFlagMexico() {
   display([sectionTwo, sectionFlags, sectionIndicator,sectionCategories], "none");
   display([sectionCountry]);
   country = document.getElementById("mexico").dataset.country;
-  let result = window.dataLovers.filterCountry(country);
+  let result = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
   console.log(result);
   const countryNameElement = document.getElementById('country-name');
   window.dataLovers.showIndicatorNamesCountry(result, countryNameElement);
@@ -96,7 +95,7 @@ function buttonFlagPeru() {
   display([sectionTwo, sectionFlags, sectionIndicator, sectionCategories], "none");
   display([sectionCountry]);
   country = document.getElementById("peru").dataset.country;
-  let result = window.dataLovers.filterCountry(country);
+  let result = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
   const countryNameElement = document.getElementById('country-name');
   window.dataLovers.showIndicatorNamesCountry(result, countryNameElement);
   document.getElementById('title-country').innerHTML = 'Perú';
@@ -108,7 +107,7 @@ function buttonFlagChile() {
   display([sectionTwo, sectionFlags, sectionIndicator, sectionCategories], "none");
   display([sectionCountry]);
   country = document.getElementById("chile").dataset.country;
-  let result = window.dataLovers.filterCountry(country);
+  let result = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
   const countryNameElement = document.getElementById('country-name');
   window.dataLovers.showIndicatorNamesCountry(result, countryNameElement);
   document.getElementById('title-country').innerHTML = 'Chile';
@@ -120,7 +119,7 @@ function buttonFlagBrasil() {
   display([sectionTwo, sectionFlags, sectionIndicator, sectionCategories], "none");
   display([sectionCountry]);
   country = document.getElementById("brasil").dataset.country;
-  let result = window.dataLovers.filterCountry(country);
+  let result = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
   const countryNameElement = document.getElementById('country-name');
   window.dataLovers.showIndicatorNamesCountry(result, countryNameElement);
   document.getElementById('title-country').innerHTML = 'Brasil';
@@ -136,7 +135,7 @@ function linkIndicator() {
     //obtener años por indicador por país
   const codeIndicator = event.srcElement.dataset.code;
   const countryIndicator = event.srcElement.dataset.country;
-  const objData = window.dataLovers.filterIndicatorYear(codeIndicator, countryIndicator);
+  const objData = window.dataLovers.filterIndicatorYear(codeIndicator, countryIndicator, indicatorsPerceptionCult);
   //console.log(objData);
   createTableYears(objData);
 }
@@ -166,36 +165,34 @@ function createTableYears(years) {
     var arrayPercent = Object.values(years);
     var percent = arrayPercent[j];
     // creates a <tr> element
-      const mycurrent_row = document.createElement("tr");
-          // creates a <td> element's
-          const year_cell = document.createElement("td");
-          const percent_cell = document.createElement("td");
-          // creates a Text Node
-          let currenttext2 = "";
+    const mycurrent_row = document.createElement("tr");
+    // creates a <td> element's
+    const year_cell = document.createElement("td");
+    const percent_cell = document.createElement("td");
+    // creates a Text Node
+    let currenttext2 = "";
     if (percent == "") { currenttext2 = document.createTextNode("no info.");
       } else {
         currenttext2 = document.createTextNode(percent);
       }
-          let currenttext = document.createTextNode(year);
-          // appends the Text Node we created into the cell <td>
-          year_cell.appendChild(currenttext);
-          percent_cell.appendChild(currenttext2);
+    let currenttext = document.createTextNode(year);
+    // appends the Text Node we created into the cell <td>
+    year_cell.appendChild(currenttext);
+    percent_cell.appendChild(currenttext2);
 
-          // appends the cell <td> into the row <tr>
-          mycurrent_row.appendChild(year_cell);
-          mycurrent_row.appendChild(percent_cell);
+    // appends the cell <td> into the row <tr>
+    mycurrent_row.appendChild(year_cell);
+    mycurrent_row.appendChild(percent_cell);
 
       // appends the row <tr> into <tbody>
       tablebody.appendChild(mycurrent_row);
   }
 
+  const titleYears = document.createTextNode("Años");
+  const titlePercents = document.createTextNode("Porcentaje %");
 
-          const titleYears = document.createTextNode("Años");
-          const titlePercents = document.createTextNode("Porcentaje %");
-
-          cellYears.appendChild(titleYears);
-          cellPercent.appendChild(titlePercents);
-
+  cellYears.appendChild(titleYears);
+  cellPercent.appendChild(titlePercents);
 
   // appends <tbody> into <table>
   table.appendChild(tablebody);

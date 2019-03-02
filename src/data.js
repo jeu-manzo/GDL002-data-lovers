@@ -1,67 +1,66 @@
 window.dataLovers = {
-filterCountry: function filterCountry(country) {
-  const dataCountry = WORLDBANK[country];
+  filterCountry: function filterCountry(country, indicatorsPerceptionCult) {
+    const dataCountry = WORLDBANK[country];
 
-  const indicatorsCountry = dataCountry.indicators.filter(function (indicator) {
-    const indicatorCode = indicator.indicatorCode;
-    const indicatorCodePerception = indicatorsPerceptionCult.map(ind => ind.indicatorCode);
-    const isIn = indicatorCodePerception.findIndex(function (val) {
-      return val === indicatorCode;
+    const indicatorsCountry = dataCountry.indicators.filter(function (indicator) {
+      const indicatorCode = indicator.indicatorCode;
+      const indicatorCodePerception = indicatorsPerceptionCult.map(ind => ind.indicatorCode);
+      const isIn = indicatorCodePerception.findIndex(function (val) {
+        return val === indicatorCode;
+      });
+
+      return isIn !== -1;
     });
 
-    return isIn !== -1;
-  });
-  return indicatorsCountry;
-
-},
+    return indicatorsCountry;
+  },
 
 
-showIndicatorNamesCountry: function showIndicatorNamesCountry(indicators, parentElement) {
-  indicators.forEach(function(element) {
-    const indicatorValue = element;
-    const newP = document.createElement("p");
-    const link = document.createElement("a");
-    newP.setAttribute("class", "one-indicator");
-    link.setAttribute("data-code", indicatorValue.indicatorCode);
-    link.setAttribute("data-country", indicatorValue.countryCode);
-    link.href = '#';
-    const content = document.createTextNode(indicatorValue.indicatorName);
-    newP.appendChild(link);
-    link.appendChild(content);
-    parentElement.parentNode.insertBefore(newP, parentElement.nextSibling);
-  });
+  showIndicatorNamesCountry: function showIndicatorNamesCountry(indicators, parentElement) {
+    indicators.forEach(function(element) {
+      const indicatorValue = element;
+      const newP = document.createElement("p");
+      const link = document.createElement("a");
+      newP.setAttribute("class", "one-indicator");
+      link.setAttribute("data-code", indicatorValue.indicatorCode);
+      link.setAttribute("data-country", indicatorValue.countryCode);
+      link.href = '#';
+      const content = document.createTextNode(indicatorValue.indicatorName);
+      newP.appendChild(link);
+      link.appendChild(content);
+      parentElement.parentNode.insertBefore(newP, parentElement.nextSibling);
+    });
 
-},
-
-
-filterIndicatorYear: function filterIndicatorYear(code, country) {
-  const countryInd = window.dataLovers.filterCountry(country);
-  const dataYear = countryInd.filter(indicator => indicator.indicatorCode == code);
-
-  return dataYear[0].data;
-
-},
+  },
 
 
-//Mostrar en pantalla Indicadores por categoria
-showAllIndicators: function showAllIndicators(category, parentElement) {
-  category.forEach(function(element) {
-    const indicatorValue = element;
-    const newP = document.createElement("p");
-    const link = document.createElement("a");
-    link.setAttribute("class", "each-indicator");
-    link.setAttribute("data-code", indicatorValue.indicatorCode);
-    // const newPSetCountry = link.setAttribute("data-country", indicatorValue.countryCode)
-    link.href = '#';
-    const content = document.createTextNode(indicatorValue.indicatorName);
-    newP.appendChild(link);
-    link.appendChild(content);
-    parentElement.parentNode.insertBefore(newP, parentElement.nextSibling);
+  filterIndicatorYear: function filterIndicatorYear(code, country, indicatorsPerceptionCult) {
+    const countryInd = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
+    const dataYear = countryInd.filter(indicator => indicator.indicatorCode == code);
 
-  });
+    return dataYear[0].data;
 
-},
+  },
 
+
+  //Mostrar en pantalla Indicadores por categoria
+  showAllIndicators: function showAllIndicators(category, parentElement) {
+    category.forEach(function(element) {
+      const indicatorValue = element;
+      const newP = document.createElement("p");
+      const link = document.createElement("a");
+      link.setAttribute("class", "each-indicator");
+      link.setAttribute("data-code", indicatorValue.indicatorCode);
+      // const newPSetCountry = link.setAttribute("data-country", indicatorValue.countryCode)
+      link.href = '#';
+      const content = document.createTextNode(indicatorValue.indicatorName);
+      newP.appendChild(link);
+      link.appendChild(content);
+      parentElement.parentNode.insertBefore(newP, parentElement.nextSibling);
+
+    });
+
+  },
 };
 
 // const arrayExample = [5.0, 8.4, 3, 2 , 6];
