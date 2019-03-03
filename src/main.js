@@ -5,8 +5,9 @@ const sectionIndicator = document.getElementById("section-indicator");
 const sectionCountry = document.getElementById('section-country');
 const sectionIndicatorCountry = document.getElementById('indicator-country');
 const sectionCategories = document.getElementById('categories');
-const sectionIndicatorCountries = document.getElementById('indicator-countries');
+const sectionIndicatorCountries = document.getElementById('indicator-contries');
 const sectionHome = document.getElementById('home');
+const sectionWhoAreWe = document.getElementById('who-are-we');
 
 const indicatorsPerceptionCult = [
   { indicatorCode: "SG.VAW.REFU.ZS",
@@ -49,19 +50,27 @@ const indicatorUnemployment = [
     indicatorName: "Proporción de jóvenes sin educación, empleo ni capacitación, mujeres (% de la población de mujeres jóvenes)"},
 ];
 
-function display (elements, display = 'inline-block') {
+function display (elements, display = 'flex') {
   for (let i = 0; i < elements.length; i++) {
     elements[i].style.display = display;
   }
 }
 
 
-display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry, sectionIndicatorCountry, sectionCategories, sectionIndicatorCountries], "none");
+display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry, sectionIndicatorCountry,
+         sectionCategories, sectionIndicatorCountries, sectionWhoAreWe], "none");
+
+document.getElementById('link-info').addEventListener("click", linkInfo);
+function linkInfo() {
+  display([sectionWhoAreWe])
+  display([sectionHome], "none");
+}
 
 
 document.getElementById("btn-data").addEventListener("click", buttonData);
 function buttonData() {
-  display([sectionTwo]);
+  display([sectionTwo], 'inline-block')
+  display([sectionHome], "none");
 }
 
 
@@ -141,6 +150,8 @@ function linkIndicator() {
   const objData = window.dataLovers.filterIndicatorYear(codeIndicator, countryIndicator, indicatorsPerceptionCult);
   createTableYears(objData);
 }
+
+
 
 //función para crear tabla de años y sus porcentajes por país
 function createTableYears(years) {
