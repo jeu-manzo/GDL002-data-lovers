@@ -75,31 +75,30 @@ window.dataLovers = {
     return array;
   },
 
+  filterYearAllContries: function filterYearAllContries(year,data) {
+      let mapYears = [];
+      data.forEach(function(e) {
+        mapYears.push(e[year]);
+      });
+      return mapYears;
+  },
+
+  //Elimina espacios vacios en un arreglo para poder sumar, devuelve un arreglo sin espacios nulos
+  forSum: function forSum(array){
+      const numSum = array.filter(num => num >=0.0001);
+      return numSum;
+    },
+
+  average: (numbers) => {
+    let sum = 0;
+    const total = numbers.length;
+    numbers.forEach(function(item) {
+      //if(item == ""){
+      //  item == 0;
+    //  }
+      sum += item;
+    });
+    return sum/total;
+  },
 
 };
-
-
-
-//Trabajar despues
-// //Filtrar información de cada indicadores por categoría de todos los países
-// function filterIndicatorCategory(categories, code) {
-  //   const dataCountry = WORLDBANK;
-  //   const arrayData = Object.values(dataCountry);
-  //   arrayData.forEach(function(element) {
-    //     const indicatorCountry = element.indicators
-    //     const filterIndicator = indicatorCountry.filter(function (indicator) {
-      //       const indicatorCode = indicator.indicatorCode
-      //       //console.log(indicatorCode);
-      //       const indicatorsCode = categories.map(ind => ind.indicatorCode);
-      //       const isIn = indicatorsCode.findIndex(function (val) {
-        //         return val === indicatorCode
-        //       })
-        //
-        //       return isIn !== -1
-        //     })
-        //
-        //     filterIndicator.forEach(function(element) {
-          //       console.log(element);
-          //     });
-          //   });
-          // }

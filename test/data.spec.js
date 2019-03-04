@@ -39,4 +39,9 @@ describe('World data functions', () => {
         const orderDescendant = window.dataLovers.orderDescendant(fixtures.objDisorder);
         expect(orderDescendant).toEqual(fixtures.objDescendant );
       });
+
+      it('Should return 20.6 the average of the array of numbers 5, 8, 10, 20, 60', () => {
+         const average = window.dataLovers.average([5, 8, 10, 20, 60]);
+         expect(average).toEqual(20.6);
+       });
 });

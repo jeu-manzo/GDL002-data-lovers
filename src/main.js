@@ -228,10 +228,10 @@ document.getElementById('example').addEventListener('change', sortByAscendant);
 function sortByAscendant(event) {
   const value = event.target.value;
   if (value === 'descendant') {
-    removeOldTable();
+    removeOldTable(document.getElementById('table-data'));
     arrData = window.dataLovers.orderDescendant(arrData);
   } else if (value === 'ascendant') {
-    removeOldTable();
+    removeOldTable(document.getElementById('table-data'));
     arrData = window.dataLovers.orderAscendant(arrData);
   }
 
@@ -239,9 +239,8 @@ function sortByAscendant(event) {
   createTableYears(arrData);
 }
 
-function removeOldTable () {
-  const table = document.getElementById('table-data');
-  table.parentNode.removeChild(table);
+function removeOldTable (element) {
+  element.parentNode.removeChild(element);
 }
 
 document.getElementById("perception-cultural").addEventListener('click', linkPerceptionCultural);
@@ -307,83 +306,13 @@ function linkIndicatorsAllContries() {
   display([sectionIndicatorCountries]);
   // console.log(filterIndicatorCategory(event.srcElement.dataset.code));
   //console.log(event);
-  const codeIndicator = event.srcElement.dataset.code;
-  // filterIndicatorCategory(indicatorsLiteracy, 'SE.TER.CUAT.MS.FE.ZS');
-  const contries = indicatorTableCountry(codeIndicator);
-  start(contries);
-  indicatorTableData(codeIndicator);
-  //console.log(data);
-  // console.log(filterYearAllContries("1980"));
+  event.srcElement.dataset.code;
+  // muestra el nombre del indicador en pantaalla
+  document.getElementById('title-indicator-grap').innerHTML = event.target.innerText;
+  const rangeYears = range(1960,2017);  //crea un arrglo con un min y un max
+  selectYear(rangeYears); //crea un select con el rango dado
 }
 
-function start(codigo) {
-  // get the reference for the body
-  const mybody = document.getElementById("table-years");
-
-
-  // creates <table> and <tbody> elements
-  const table = document.createElement("table");
-  const tablebody = document.createElement("tbody");
-
-  const header = document.createElement("tr");
-
-  const cellYears = document.createElement("th");
-  const cellPercent = document.createElement("th");
-
-  header.appendChild(cellYears);
-  header.appendChild(cellPercent);
-
-  table.appendChild(header);
-
-  //console.log(auxiliar)
-
-  // creating all cells
-  for(var j = 0; j < 4; j++) {
-    let year = codigo[j];
-     //var percent = Object.values(data)[j];
-     //year = 5;
-    var percent = 2;
-   // creates a <tr> element
-    const mycurrent_row = document.createElement("tr");
-
-
-     // creates a <td> element's
-     const year_cell = document.createElement("td");
-     const percent_cell = document.createElement("td");
-     // creates a Text Node
-     let currenttext2 = "";
-     if (percent == "") { currenttext2 = document.createTextNode("no info.");
-       } else {
-         currenttext2 = document.createTextNode(percent);
-       }
-     const currenttext = document.createTextNode(year);
-     // appends the Text Node we created into the cell <td>
-     year_cell.appendChild(currenttext);
-     percent_cell.appendChild(currenttext2);
-
-     // appends the cell <td> into the row <tr>
-     mycurrent_row.appendChild(year_cell);
-     mycurrent_row.appendChild(percent_cell);
-
-       // appends the row <tr> into <tbody>
-    tablebody.appendChild(mycurrent_row);
-  }
-
-
-  const years = document.createTextNode("Anos");
-  const percents = document.createTextNode("Porcentaje %");
-
-  cellYears.appendChild(years);
-  cellPercent.appendChild(percents);
-
-
-  // appends <tbody> into <table>
-  table.appendChild(tablebody);
-  // appends <table> into <body>
-  mybody.appendChild(table);
-  // sets the border attribute of mytable to 2;
-  table.setAttribute("border","2");
-}
 
 //iterar elementos por clase para los eventos click
 function getElementsforEvents(className, functionName) {
@@ -395,33 +324,124 @@ function getElementsforEvents(className, functionName) {
 }
 
 
+document.getElementById('show-table').addEventListener('click', capturarValor);
+   function capturarValor(){
+     //console.log(linkIndicatorsAllContries())
+     const yearValue= document.getElementById("Select1").value;
+    const codeIndicator = "SL.UEM.INTM.FE.ZS";
+      //const codeIndicator = linkIndicatorsAllContries();
 
- // //// de data.js
- // let indicatorGrales = (code) => {
- //       indiPer = WORLDBANK.PER.indicators.filter(indicator => indicator.indicatorCode == code);
- //       indiMex = WORLDBANK.MEX.indicators.filter(indicator => indicator.indicatorCode == code);
- //        indiBra = WORLDBANK.BRA.indicators.filter(indicator => indicator.indicatorCode == code);
- //        indiChl = WORLDBANK.CHL.indicators.filter(indicator => indicator.indicatorCode == code);
- //        indiGral = [indiBra,indiChl,indiMex,indiPer];
- //        return indiGral;
- //     };
- //
- // //retorna nombre paises
- // indicatorTableCountry = (code) => {
- //   const pruebas21=[];
- //   indicatorGrales(code).forEach(function(e) {
- //     pruebas21.push(e[0]);
- //   });
- //    fullNames = pruebas21.map(inventor => inventor.countryName);
- //    return fullNames;
- //   };
- //
- // //retorna data
- // indicatorTableData = (code) => {
- //   const pruebas12=[];
- //   indicatorGrales(code).forEach(function(e) {
- //     pruebas12.push(e[0]);
- //   });
- //    fullData = pruebas12.map(inventor => inventor.data);
- //    return fullData;
- //   };
+    //nos da un array con los paises para dicho indicador
+    const contries = indicatorTableCountry(codeIndicator);
+      //da un arreglo con los datos de cada pais para el indicador
+    const data = indicatorTableData(codeIndicator);
+    const dataYears = window.dataLovers.filterYearAllContries(yearValue,data);//regresa un arreglo con la informacion para el ano seleccionado
+    tableYear(contries,dataYears);  //crea la tabla
+    const dataSum = window.dataLovers.forSum(dataYears); //toma los valores y checa espacios vacios y los quita
+    window.dataLovers.average(dataSum); //da el promedio
+    // removeOldTable(document.getElementById("table-years-table"));
+}
+
+function range(min, max) {
+  let ran=[];
+  for(let i=min; i<=max; i++){
+    ran = ran.concat(i);
+}
+  return ran;
+}
+
+//crea un select dado un arreglo de valores determinado
+function selectYear(rangeYears){
+const select1 = document.getElementById("select1");
+let sel = document.createElement('select');
+sel.name = 'drop1';
+sel.id = 'Select1';
+
+let options_num = "";
+
+rangeYears.forEach( function(year) {
+  options_num += '<option value="' + year + '">' + year + '</option>';
+});
+sel.innerHTML = options_num;
+  //document.body.appendChild(sel);
+  select1.appendChild(sel);
+}
+
+//Crea una tabla dado un ano seleccionado y su lista de informacion
+function tableYear(contries,porcentaje) {
+// get the reference for the body
+const mybody = document.getElementById("table-years");
+
+
+// creates <table> and <tbody> elements
+const table = document.createElement("table");
+table.setAttribute("id", "table-years-table");
+const tablebody = document.createElement("tbody");
+
+const header = document.createElement("tr");
+
+const cellYears = document.createElement("th");
+const cellPercent = document.createElement("th");
+
+header.appendChild(cellYears);
+header.appendChild(cellPercent);
+
+table.appendChild(header);
+
+// creating all cells
+for(var j = 0; j < 4; j++) {
+let countriesName = contries[j];
+let percent = porcentaje[j];
+ // creates a <tr> element
+ const mycurrent_row = document.createElement("tr");
+ // creates a <td> element's
+ const year_cell = document.createElement("td");
+ const percent_cell = document.createElement("td");
+ // creates a Text Node
+ let currenttext2 = null;
+ if (percent == "") { currenttext2 = document.createTextNode("no info.");
+   } else {
+     currenttext2 = document.createTextNode(percent);
+   }
+       const currenttext = document.createTextNode(countriesName);
+       // appends the Text Node we created into the cell <td>
+       year_cell.appendChild(currenttext);
+       percent_cell.appendChild(currenttext2);
+
+       // appends the cell <td> into the row <tr>
+       mycurrent_row.appendChild(year_cell);
+       mycurrent_row.appendChild(percent_cell);
+
+   // appends the row <tr> into <tbody>
+   tablebody.appendChild(mycurrent_row);
+}
+
+const footer = document.createElement("tr");
+
+const cellAverage = document.createElement("th");
+const average = document.createElement("th");
+
+footer.appendChild(cellAverage);
+footer.appendChild(average);
+
+tablebody.appendChild(footer);
+
+ const years = document.createTextNode("País");
+ const percents = document.createTextNode("Porcentaje %");
+
+ cellYears.appendChild(years);
+ cellPercent.appendChild(percents);
+ const yearsAverage = document.createTextNode("Promedio");
+ const percentsAverage = document.createTextNode(window.dataLovers.average(window.dataLovers.forSum(porcentaje)));
+
+ cellAverage.appendChild(yearsAverage);
+ average.appendChild(percentsAverage);
+
+// appends <tbody> into <table>
+table.appendChild(tablebody);
+// appends <table> into <body>
+mybody.appendChild(table);
+// sets the border attribute of mytable to 2;
+table.setAttribute("border","10");
+//table.setAttribute("align","center");
+}
