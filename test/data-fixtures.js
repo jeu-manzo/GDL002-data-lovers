@@ -40,8 +40,42 @@ const indicatorsPerceptionCult = [
 
 const objYears = {1960: "", 1961: "", 1962: "", 1963: "", 1964: "", 1965: "", 1966: "", 1967: "", 1968: "", 1969: "", 1970: "", 1971: "", 1972: "", 1973: "", 1974: "", 1975: "", 1976: "", 1977: "", 1978: "", 1979: "", 1980: "", 1981: "", 1982: "", 1983: "", 1984: "", 1985: "", 1986: "", 1987: "", 1988: "", 1989: "", 1990: "", 1991: "", 1992: "", 1993: "", 1994: "", 1995: "", 1996: "", 1997: "", 1998: "", 1999: "", 2000: "", 2001: "", 2002: "", 2003: "", 2004: "", 2005: "", 2006: 0.3, 2007: "", 2008: 0.8, 2009: 1, 2010: 0.8, 2011: 0.6, 2012: 0.6, 2013: "", 2014: "", 2015: "", 2016: "", 2017: ""};
 
+const objDisorder = [
+{year: "1960", percent: "5"},
+{year: "1961", percent: "10"},
+{year: "1962", percent: "9"},
+{year: "1963", percent: "2"},
+{year: "1964", percent: "4"},
+{year: "1965", percent: "3"},
+{year: "1966", percent: "0"}
+];
+
+const objAscedant = [
+  {year: "1966", percent: "0"},
+  {year: "1963", percent: "2"},
+  {year: "1965", percent: "3"},
+  {year: "1964", percent: "4"},
+  {year: "1960", percent: "5"},
+  {year: "1962", percent: "9"},
+  {year: "1961", percent: "10"}
+];
+
+const objDescendant = [
+{year: "1961", percent: "10"},
+{year: "1962", percent: "9"},
+{year: "1960", percent: "5"},
+{year: "1964", percent: "4"},
+{year: "1965", percent: "3"},
+{year: "1963", percent: "2"},
+{year: "1966", percent: "0"}
+];
+
+
 module.exports = {
   filterMxData: filterMxData,
   indicatorsPerceptionCult: indicatorsPerceptionCult,
   objYears: objYears,
+  objDisorder: objDisorder,
+  objAscedant: objAscedant,
+  objDescendant: objDescendant,
 };

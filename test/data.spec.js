@@ -30,4 +30,13 @@ describe('World data functions', () => {
       expect(yearsPer).toEqual(fixtures.objYears);
     });
 
+    it('Should return an array of objects in ascendant order by the percent', () => {
+       const orderAscendant = window.dataLovers.orderAscendant(fixtures.objDisorder);
+       expect(orderAscendant).toEqual(fixtures.objAscedant );
+     });
+
+     it('Should return an array of objects in descendant order by the percent', () => {
+        const orderDescendant = window.dataLovers.orderDescendant(fixtures.objDisorder);
+        expect(orderDescendant).toEqual(fixtures.objDescendant );
+      });
 });

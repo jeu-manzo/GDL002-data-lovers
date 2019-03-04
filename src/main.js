@@ -8,6 +8,7 @@ const sectionCategories = document.getElementById('categories');
 const sectionIndicatorCountries = document.getElementById('indicator-contries');
 const sectionHome = document.getElementById('home');
 const sectionWhoAreWe = document.getElementById('who-are-we');
+let arrData = [];
 
 const indicatorsPerceptionCult = [
   { indicatorCode: "SG.VAW.REFU.ZS",
@@ -50,6 +51,8 @@ const indicatorUnemployment = [
     indicatorName: "Proporción de jóvenes sin educación, empleo ni capacitación, mujeres (% de la población de mujeres jóvenes)"},
 ];
 
+
+
 function display (elements, display = 'flex') {
   for (let i = 0; i < elements.length; i++) {
     elements[i].style.display = display;
@@ -62,14 +65,14 @@ display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry, sectionIndi
 
 document.getElementById('link-info').addEventListener("click", linkInfo);
 function linkInfo() {
-  display([sectionWhoAreWe])
+  display([sectionWhoAreWe]);
   display([sectionHome], "none");
 }
 
 
 document.getElementById("btn-data").addEventListener("click", buttonData);
 function buttonData() {
-  display([sectionTwo], 'inline-block')
+  display([sectionTwo], 'inline-block');
   display([sectionHome], "none");
 }
 
@@ -95,7 +98,7 @@ function buttonFlagMexico() {
   country = document.getElementById("mexico").dataset.country;
   let result = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
   const countryNameElement = document.getElementById('country-name');
-  const log = window.dataLovers.showIndicatorNamesCountry(result, countryNameElement);
+  window.dataLovers.showIndicatorNamesCountry(result, countryNameElement);
   document.getElementById('title-country').innerHTML = 'Mexico';
   getElementsforEvents('one-indicator', linkIndicator);
 }
@@ -147,25 +150,26 @@ function linkIndicator() {
   const countryIndicator = event.srcElement.dataset.country;
   const objData = window.dataLovers.filterIndicatorYear(codeIndicator, countryIndicator, indicatorsPerceptionCult);
 
-  const arrData = [];
-  const years = Object.keys(objData)
-  const percents = Object.values(objData)
+  arrData = [];
+  const years = Object.keys(objData);
+  const percents = Object.values(objData);
 
   for (let i = 0; i < years.length; i++) {
-    arrData.push({ year: years[i], percent: percents[i]})
+    arrData.push({ year: years[i], percent: percents[i]});
   }
 
-  const yearsPercentOrdered = orderDescendant(arrData)
+  const yearsPercentOrdered = arrData;
   createTableYears(yearsPercentOrdered);
 }
 
 //función para crear tabla de años y sus porcentajes por país
 function createTableYears(yearsPercentOrdered) {
-        // get the reference for the body
+  // get the reference for the body
   const mybody = document.getElementById("indicator-table-country");
 
   // creates <table> and <tbody> elements
   const table = document.createElement("table");
+  table.setAttribute("id", "table-data");
   const tablebody = document.createElement("tbody");
 
   const header = document.createElement("tr");
@@ -180,8 +184,8 @@ function createTableYears(yearsPercentOrdered) {
 
   // creating all cells
   for(let j = 0; j < yearsPercentOrdered.length; j++) {
-    var year = yearsPercentOrdered[j].year
-    var percent = yearsPercentOrdered[j].percent
+    var year = yearsPercentOrdered[j].year;
+    var percent = yearsPercentOrdered[j].percent;
     // creates a <tr> element
     const mycurrent_row = document.createElement("tr");
     // creates a <td> element's
@@ -220,25 +224,24 @@ function createTableYears(yearsPercentOrdered) {
   table.setAttribute("border","2");
 }
 
-//Ordenar de Menor a Mayor
-
-
 document.getElementById('example').addEventListener('change', sortByAscendant);
-function sortByAscendant() {
-  //console.log(event);
-  if (event.target[1]) {
-    alert("mayor a menor");
-    //console.log(orderDescendant(array))
-  }else {
-    alert('menor a mayor');
-    //console.log(orderAscendant(array))
+function sortByAscendant(event) {
+  const value = event.target.value;
+  if (value === 'descendant') {
+    removeOldTable();
+    arrData = window.dataLovers.orderDescendant(arrData);
+  } else if (value === 'ascendant') {
+    removeOldTable();
+    arrData = window.dataLovers.orderAscendant(arrData);
   }
+
+  // removeOldTable();
+  createTableYears(arrData);
 }
 
-// addEventListener
-function showValues (e) {
-  const indicators = filterIndicator()
-  renderIndicators(indicators)
+function removeOldTable () {
+  const table = document.getElementById('table-data');
+  table.parentNode.removeChild(table);
 }
 
 document.getElementById("perception-cultural").addEventListener('click', linkPerceptionCultural);

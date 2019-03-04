@@ -37,9 +37,8 @@ window.dataLovers = {
   filterIndicatorYear: function filterIndicatorYear(code, country, indicatorsPerceptionCult) {
     const countryInd = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
     const dataYear = countryInd.filter(indicator => indicator.indicatorCode == code);
-    console.log(dataYear);
 
-    return countryInd[0].data;
+    return dataYear[0].data;
   },
 
 
@@ -61,25 +60,25 @@ window.dataLovers = {
     });
 
   },
+
+  orderAscendant: function orderAscendant(array) {
+    array.sort(function(a, b) {
+      return a.percent - b.percent;
+    });
+    return array;
+  },
+
+  orderDescendant: function orderDescendant(array) {
+    array.sort(function(a, b) {
+      return b.percent - a.percent;
+    });
+    return array;
+  },
+
+
 };
 
-// const arrayExample = [5.0, 8.4, 3, 2 , 6];
-//
-function orderAscendant(array) {
-  array.sort(function(a, b) {
-    return a - b;
-  });
-  return array;
-}
 
-function orderDescendant(array) {
-  array.sort(function(a, b) {
-    return b.percent - a.percent;
-  });
-  return array;
-}
-//
-// console.log(orderAscendant(arrayExample));
 
 //Trabajar despues
 // //Filtrar información de cada indicadores por categoría de todos los países
