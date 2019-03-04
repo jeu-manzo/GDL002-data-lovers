@@ -83,6 +83,18 @@ function buttonCountry() {
   display([sectionFlags]);
 }
 
+document.getElementById("peru").addEventListener("click", buttonCountryPeru);
+function buttonCountryPeru() {
+  display([sectionTwo,sectionFlags], "none");
+  display([sectionPeru]);
+}
+
+document.getElementById("mexico").addEventListener("click", buttonCountryMex);
+function buttonCountryMex() {
+  display([sectionTwo,sectionFlags,sectionPeru], "none");
+  display([sectionMex]);
+}
+
 document.getElementById("btn-indicator").addEventListener("click", buttonIndicator);
 function buttonIndicator() {
   display([sectionTwo, sectionFlags, sectionCategories], "none");
