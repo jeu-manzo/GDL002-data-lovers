@@ -94,10 +94,8 @@ function buttonFlagMexico() {
   display([sectionCountry]);
   country = document.getElementById("mexico").dataset.country;
   let result = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
-  console.log(result.map(x => x.indicatorName));
   const countryNameElement = document.getElementById('country-name');
   const log = window.dataLovers.showIndicatorNamesCountry(result, countryNameElement);
-  console.log(typeof(log));
   document.getElementById('title-country').innerHTML = 'Mexico';
   getElementsforEvents('one-indicator', linkIndicator);
 }
@@ -148,13 +146,21 @@ function linkIndicator() {
   const codeIndicator = event.srcElement.dataset.code;
   const countryIndicator = event.srcElement.dataset.country;
   const objData = window.dataLovers.filterIndicatorYear(codeIndicator, countryIndicator, indicatorsPerceptionCult);
-  createTableYears(objData);
+
+  const arrData = [];
+  const years = Object.keys(objData)
+  const percents = Object.values(objData)
+
+  for (let i = 0; i < years.length; i++) {
+    arrData.push({ year: years[i], percent: percents[i]})
+  }
+
+  const yearsPercentOrdered = orderDescendant(arrData)
+  createTableYears(yearsPercentOrdered);
 }
 
-
-
 //función para crear tabla de años y sus porcentajes por país
-function createTableYears(years) {
+function createTableYears(yearsPercentOrdered) {
         // get the reference for the body
   const mybody = document.getElementById("indicator-table-country");
 
@@ -173,10 +179,9 @@ function createTableYears(years) {
   table.appendChild(header);
 
   // creating all cells
-  for(var j = 0; j < Object.keys(years).length; j++) {
-    var year = Object.keys(years)[j];
-    var arrayPercent = Object.values(years);
-    var percent = arrayPercent[j];
+  for(let j = 0; j < yearsPercentOrdered.length; j++) {
+    var year = yearsPercentOrdered[j].year
+    var percent = yearsPercentOrdered[j].percent
     // creates a <tr> element
     const mycurrent_row = document.createElement("tr");
     // creates a <td> element's
@@ -230,6 +235,11 @@ function sortByAscendant() {
   }
 }
 
+// addEventListener
+function showValues (e) {
+  const indicators = filterIndicator()
+  renderIndicators(indicators)
+}
 
 document.getElementById("perception-cultural").addEventListener('click', linkPerceptionCultural);
 function linkPerceptionCultural() {
@@ -304,73 +314,73 @@ function linkIndicatorsAllContries() {
 }
 
 function start(codigo) {
-               // get the reference for the body
-               const mybody = document.getElementById("table-years");
+  // get the reference for the body
+  const mybody = document.getElementById("table-years");
 
 
-               // creates <table> and <tbody> elements
-               const table = document.createElement("table");
-               const tablebody = document.createElement("tbody");
+  // creates <table> and <tbody> elements
+  const table = document.createElement("table");
+  const tablebody = document.createElement("tbody");
 
-              const header = document.createElement("tr");
+  const header = document.createElement("tr");
 
-             const cellYears = document.createElement("th");
-             const cellPercent = document.createElement("th");
+  const cellYears = document.createElement("th");
+  const cellPercent = document.createElement("th");
 
-             header.appendChild(cellYears);
-             header.appendChild(cellPercent);
+  header.appendChild(cellYears);
+  header.appendChild(cellPercent);
 
-             table.appendChild(header);
+  table.appendChild(header);
 
-           //console.log(auxiliar)
+  //console.log(auxiliar)
 
-               // creating all cells
-               for(var j = 0; j < 4; j++) {
-                let year = codigo[j];
-                   //var percent = Object.values(data)[j];
-                   //year = 5;
-                  var percent = 2;
-                 // creates a <tr> element
-                  const mycurrent_row = document.createElement("tr");
-
-
-                       // creates a <td> element's
-                       const year_cell = document.createElement("td");
-                       const percent_cell = document.createElement("td");
-                       // creates a Text Node
-                       let currenttext2 = "";
-                 if (percent == "") { currenttext2 = document.createTextNode("no info.");
-                   } else {
-                     currenttext2 = document.createTextNode(percent);
-                   }
-                       const currenttext = document.createTextNode(year);
-                       // appends the Text Node we created into the cell <td>
-                       year_cell.appendChild(currenttext);
-                       percent_cell.appendChild(currenttext2);
-
-                       // appends the cell <td> into the row <tr>
-                       mycurrent_row.appendChild(year_cell);
-                       mycurrent_row.appendChild(percent_cell);
-
-                   // appends the row <tr> into <tbody>
-                   tablebody.appendChild(mycurrent_row);
-               }
+  // creating all cells
+  for(var j = 0; j < 4; j++) {
+    let year = codigo[j];
+     //var percent = Object.values(data)[j];
+     //year = 5;
+    var percent = 2;
+   // creates a <tr> element
+    const mycurrent_row = document.createElement("tr");
 
 
-                      const years = document.createTextNode("Anos");
-                      const percents = document.createTextNode("Porcentaje %");
+     // creates a <td> element's
+     const year_cell = document.createElement("td");
+     const percent_cell = document.createElement("td");
+     // creates a Text Node
+     let currenttext2 = "";
+     if (percent == "") { currenttext2 = document.createTextNode("no info.");
+       } else {
+         currenttext2 = document.createTextNode(percent);
+       }
+     const currenttext = document.createTextNode(year);
+     // appends the Text Node we created into the cell <td>
+     year_cell.appendChild(currenttext);
+     percent_cell.appendChild(currenttext2);
 
-                       cellYears.appendChild(years);
-                       cellPercent.appendChild(percents);
+     // appends the cell <td> into the row <tr>
+     mycurrent_row.appendChild(year_cell);
+     mycurrent_row.appendChild(percent_cell);
+
+       // appends the row <tr> into <tbody>
+    tablebody.appendChild(mycurrent_row);
+  }
 
 
-               // appends <tbody> into <table>
-               table.appendChild(tablebody);
-               // appends <table> into <body>
-               mybody.appendChild(table);
-               // sets the border attribute of mytable to 2;
-               table.setAttribute("border","2");
-             }
+  const years = document.createTextNode("Anos");
+  const percents = document.createTextNode("Porcentaje %");
+
+  cellYears.appendChild(years);
+  cellPercent.appendChild(percents);
+
+
+  // appends <tbody> into <table>
+  table.appendChild(tablebody);
+  // appends <table> into <body>
+  mybody.appendChild(table);
+  // sets the border attribute of mytable to 2;
+  table.setAttribute("border","2");
+}
 
 //iterar elementos por clase para los eventos click
 function getElementsforEvents(className, functionName) {
