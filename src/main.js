@@ -83,17 +83,6 @@ function buttonCountry() {
   display([sectionFlags]);
 }
 
-document.getElementById("peru").addEventListener("click", buttonCountryPeru);
-function buttonCountryPeru() {
-  display([sectionTwo,sectionFlags], "none");
-  display([sectionPeru]);
-}
-
-document.getElementById("mexico").addEventListener("click", buttonCountryMex);
-function buttonCountryMex() {
-  display([sectionTwo,sectionFlags,sectionPeru], "none");
-  display([sectionMex]);
-}
 
 document.getElementById("btn-indicator").addEventListener("click", buttonIndicator);
 function buttonIndicator() {
@@ -380,7 +369,7 @@ sel.innerHTML = options_num;
 }
 
 //Crea una tabla dado un ano seleccionado y su lista de informacion
-function tableYear(contries,porcentaje) {
+function tableYear(contries, porcentaje) {
 // get the reference for the body
 const mybody = document.getElementById("table-years");
 
