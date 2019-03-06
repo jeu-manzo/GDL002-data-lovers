@@ -8,6 +8,7 @@ const sectionCategories = document.getElementById('categories');
 const sectionIndicatorCountries = document.getElementById('indicator-contries');
 const sectionHome = document.getElementById('home');
 const sectionWhoAreWe = document.getElementById('who-are-we');
+let country = "";
 let arrData = [];
 
 const indicatorsPerceptionCult = [
@@ -66,21 +67,24 @@ display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry, sectionIndi
 document.getElementById('link-info').addEventListener("click", linkInfo);
 function linkInfo() {
   display([sectionWhoAreWe]);
-  display([sectionHome], "none");
+  display([sectionHome, sectionTwo, sectionFlags, sectionIndicator, sectionCountry, sectionIndicatorCountry,
+           sectionCategories, sectionIndicatorCountries,], "none");
 }
 
 
 document.getElementById("btn-data").addEventListener("click", buttonData);
 function buttonData() {
   display([sectionTwo], 'inline-block');
-  display([sectionHome], "none");
+  display([sectionHome, sectionFlags, sectionIndicator, sectionCountry, sectionIndicatorCountry,
+           sectionCategories, sectionIndicatorCountries, sectionWhoAreWe], "none");
 }
 
 
 document.getElementById("btn-country").addEventListener("click", buttonCountry);
 function buttonCountry() {
-  display([sectionTwo, sectionCategories], "none");
   display([sectionFlags]);
+  display([sectionHome, sectionTwo, sectionIndicator, sectionCountry, sectionIndicatorCountry,
+           sectionCategories, sectionIndicatorCountries, sectionWhoAreWe], "none");
 }
 
 document.getElementById("peru").addEventListener("click", buttonCountryPeru);
@@ -97,16 +101,16 @@ function buttonCountryMex() {
 
 document.getElementById("btn-indicator").addEventListener("click", buttonIndicator);
 function buttonIndicator() {
-  display([sectionTwo, sectionFlags, sectionCategories], "none");
   display([sectionIndicator]);
+  display([sectionHome, sectionTwo, sectionFlags, sectionCountry, sectionIndicatorCountry,
+           sectionCategories, sectionIndicatorCountries, sectionWhoAreWe], "none");
 }
-
-let country = "";
 
 document.getElementById("mexico").addEventListener("click", buttonFlagMexico);
 function buttonFlagMexico() {
-  display([sectionTwo, sectionFlags, sectionIndicator,sectionCategories], "none");
   display([sectionCountry]);
+  display([sectionHome, sectionTwo, sectionFlags, sectionIndicator, sectionIndicatorCountry,
+           sectionCategories, sectionIndicatorCountries, sectionWhoAreWe], "none");
   country = document.getElementById("mexico").dataset.country;
   let result = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
   const countryNameElement = document.getElementById('country-name');
@@ -117,8 +121,9 @@ function buttonFlagMexico() {
 
 document.getElementById("peru").addEventListener("click", buttonFlagPeru);
 function buttonFlagPeru() {
-  display([sectionTwo, sectionFlags, sectionIndicator, sectionCategories], "none");
   display([sectionCountry]);
+  display([sectionHome, sectionTwo, sectionFlags, sectionIndicator, sectionIndicatorCountry,
+           sectionCategories, sectionIndicatorCountries, sectionWhoAreWe], "none");
   country = document.getElementById("peru").dataset.country;
   let result = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
   const countryNameElement = document.getElementById('country-name');
@@ -129,8 +134,9 @@ function buttonFlagPeru() {
 
 document.getElementById("chile").addEventListener("click", buttonFlagChile);
 function buttonFlagChile() {
-  display([sectionTwo, sectionFlags, sectionIndicator, sectionCategories], "none");
   display([sectionCountry]);
+  display([sectionHome, sectionTwo, sectionFlags, sectionIndicator, sectionIndicatorCountry,
+           sectionCategories, sectionIndicatorCountries, sectionWhoAreWe], "none");
   country = document.getElementById("chile").dataset.country;
   let result = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
   const countryNameElement = document.getElementById('country-name');
@@ -141,8 +147,9 @@ function buttonFlagChile() {
 
 document.getElementById("brasil").addEventListener("click", buttonFlagBrasil);
 function buttonFlagBrasil() {
-  display([sectionTwo, sectionFlags, sectionIndicator, sectionCategories], "none");
   display([sectionCountry]);
+  display([sectionHome, sectionTwo, sectionFlags, sectionIndicator, sectionIndicatorCountry,
+           sectionCategories, sectionIndicatorCountries, sectionWhoAreWe], "none");
   country = document.getElementById("brasil").dataset.country;
   let result = window.dataLovers.filterCountry(country, indicatorsPerceptionCult);
   const countryNameElement = document.getElementById('country-name');
@@ -152,8 +159,9 @@ function buttonFlagBrasil() {
 }
 
 function linkIndicator() {
-  display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry], "none");
   display([sectionIndicatorCountry]);
+  display([sectionHome, sectionTwo, sectionFlags, sectionIndicator, sectionCountry,
+           sectionCategories, sectionIndicatorCountries, sectionWhoAreWe], "none");
   //agregar títutlo
   //console.log(event);
   document.getElementById('title-indicator').innerHTML = event.target.innerText;
@@ -257,8 +265,9 @@ function removeOldTable (element) {
 
 document.getElementById("perception-cultural").addEventListener('click', linkPerceptionCultural);
 function linkPerceptionCultural() {
-  display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry], "none");
   display([sectionCategories]);
+  display([sectionHome, sectionTwo, sectionFlags, sectionIndicator, sectionCountry,
+           sectionIndicatorCountry, sectionIndicatorCountries, sectionWhoAreWe], "none");
   const elementNode = document.getElementById('section-categories');
   window.dataLovers.showAllIndicators(indicatorsPerceptionCult, elementNode);
   getElementsforEvents('each-indicator', linkIndicatorsAllContries);
@@ -266,8 +275,9 @@ function linkPerceptionCultural() {
 
 document.getElementById("literacy").addEventListener('click', linkLiteracy);
 function linkLiteracy() {
-  display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry], "none");
   display([sectionCategories]);
+  display([sectionHome, sectionTwo, sectionFlags, sectionIndicator, sectionCountry,
+           sectionIndicatorCountry, sectionIndicatorCountries, sectionWhoAreWe], "none");
   const elementNode = document.getElementById('section-categories');
   window.dataLovers.showAllIndicators(indicatorsLiteracy, elementNode);
   getElementsforEvents('each-indicator', linkIndicatorsAllContries);
@@ -275,8 +285,9 @@ function linkLiteracy() {
 
 document.getElementById("unemployment").addEventListener('click', linkUnemployment);
 function linkUnemployment() {
-  display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry], "none");
   display([sectionCategories]);
+  display([sectionHome, sectionTwo, sectionFlags, sectionIndicator, sectionCountry,
+           sectionIndicatorCountry, sectionIndicatorCountries, sectionWhoAreWe], "none");
   const elementNode = document.getElementById('section-categories');
   window.dataLovers.showAllIndicators(indicatorUnemployment, elementNode);
   getElementsforEvents('each-indicator', linkIndicatorsAllContries);
@@ -314,8 +325,9 @@ const indicatorTableData = (code) => {
 
 //
 function linkIndicatorsAllContries() {
-  display([sectionTwo, sectionFlags, sectionIndicator, sectionCountry, sectionCategories], "none");
   display([sectionIndicatorCountries]);
+  display([sectionHome, sectionTwo, sectionFlags, sectionIndicator, sectionCountry,
+           sectionIndicatorCountry, sectionCategories, sectionWhoAreWe], "none");
   // console.log(filterIndicatorCategory(event.srcElement.dataset.code));
   //console.log(event);
   event.srcElement.dataset.code;
