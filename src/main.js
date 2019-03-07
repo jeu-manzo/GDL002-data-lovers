@@ -1,7 +1,3 @@
-//google Charts
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
-
 //Secciones del html
 const sectionTwo = document.getElementById("entendiendo-violencia");
 const sectionFlags = document.getElementById("section-flags");
