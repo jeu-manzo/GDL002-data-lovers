@@ -1,4 +1,8 @@
-//let menu = document.getElementsByClassName("header");
+//google Charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+//Secciones del html
 const sectionTwo = document.getElementById("entendiendo-violencia");
 const sectionFlags = document.getElementById("section-flags");
 const sectionIndicator = document.getElementById("section-indicator");
@@ -8,6 +12,7 @@ const sectionCategories = document.getElementById('categories');
 const sectionIndicatorCountries = document.getElementById('indicator-contries');
 const sectionHome = document.getElementById('home');
 const sectionWhoAreWe = document.getElementById('who-are-we');
+
 let country = "";
 let arrData = [];
 
@@ -180,6 +185,13 @@ function linkIndicator() {
 
   const yearsPercentOrdered = arrData;
   createTableYears(yearsPercentOrdered);
+}
+
+document.getElementById('btn-chart-country').addEventListener('click', chartCountry);
+function chartCountry() {
+  removeOldTable(document.getElementById('table-data'));
+  const chartCountry = document.getElementById('chart-country');
+  sectionIndicatorCountry.appendChild(chartCountry);
 }
 
 //función para crear tabla de años y sus porcentajes por país
@@ -469,3 +481,29 @@ mybody.appendChild(table);
 table.setAttribute("border","10");
 //table.setAttribute("align","center");
 }
+
+
+///butones para Regresar
+document.getElementById('btn-section-country').addEventListener('click', btnSectionCountry);
+function btnSectionCountry() {
+  display([sectionFlags]);
+  display([sectionHome, sectionTwo, sectionIndicator, sectionCountry, sectionIndicatorCountry,
+           sectionCategories, sectionIndicatorCountries, sectionWhoAreWe], "none");
+}
+
+// document.getElementById('btn-indicator-country').addEventListener('click', btnIndicatorCountry);
+// function btnIndicatorCountry() {
+//
+// }
+
+document.getElementById('btn-categories').addEventListener('click', btnCategories);
+function btnCategories() {
+  display([sectionIndicator]);
+  display([sectionHome, sectionTwo, sectionFlags, sectionCountry, sectionIndicatorCountry,
+           sectionCategories, sectionIndicatorCountries, sectionWhoAreWe], "none");
+}
+
+// document.getElementById('btn-indicator-contries').addEventListener('click', btnIndicatorCountries);
+// function btnIndicatorCountries() {
+//
+// }
